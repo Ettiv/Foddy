@@ -1,0 +1,18 @@
+.sideBarPosition{
+    width:200px;
+    background-color:#7FFFD4;
+    height: 100%;
+    border-right:1px solid rgb(2, 144, 137);
+    margin-left: -200px;
+    transition: all ease 0.5s;
+}
+.sideBarActive{
+    margin-left: 0px;
+    transition: all ease 0.5s;
+}
+
+
+.ulPosition{
+    display: flex;
+    flex-direction: column;
+}

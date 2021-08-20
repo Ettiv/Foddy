@@ -1,0 +1,45 @@
+.searchBar{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items:flex-end;
+    
+}
+
+.searchInput{
+    flex: 1 1 auto;
+    margin-left:4px;
+    border-bottom: 1px solid gray;
+    height: 100%;
+    font-size: 1.3em;
+    background:none;
+}
+
+.buttonsContainerForSearchBar{
+    margin: 0 4px 0 0;
+    display: flex;
+    border-bottom: 1px solid gray;
+}
+
+
+.cancelBtn{
+    border-right: 1px solid gray;
+}
+
+.cancelBtn,.searchBtn{
+    margin: 2px;
+    margin-left: 0px;
+    background:none;
+}
+
+.cancelBtn:hover,.searchBtn:hover{
+    cursor: pointer;
+    color: lightseagreen;
+}
+
+.searchInput:focus{
+    border-bottom: 2px solid lightseagreen;
+    outline: none;
+    background:none;
+}
+

@@ -1,0 +1,16 @@
+.plusButtonContainer{
+    margin: 6px;
+    border: 1px dashed rgb(2, 144, 137);
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content:center ;
+}
+
+.plusButonPicture{
+    border-radius: 10px;
+    max-width: 70%;
+    max-height: 70% ;  
+}

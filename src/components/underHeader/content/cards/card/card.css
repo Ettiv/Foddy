@@ -1,0 +1,66 @@
+.cardContainer{
+    margin: 6px;
+    border: 2px solid rgb(2, 144, 137);
+    width: 110px;
+    height: 160px;
+    border-radius: 10px;
+}
+
+.addedCardContainer{
+    margin: 6px;
+    border: 2px dashed rgb(2, 144, 137);
+    width: 110px;
+    height: 160px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content:center ;
+}
+
+.cardPictureContainer{
+    width: 100%;
+    height: 80%;
+    border-bottom: 2px solid rgb(2, 144, 137);
+    border-radius: 10px 10px 0 0;  
+}
+
+.cardPicture{
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
+}
+
+.addedCardPicture{
+    border-radius: 10px;
+    max-width: 70%;
+    max-height: 70% ;  
+}
+
+
+
+.cardName{
+    padding: 4px;
+    background-color:#7FFFD4;
+    width: calc(100% - 8px);
+    height:calc(20% - 10px);
+    display: flex;
+    align-items: center;
+    border-radius: 0 0 10px 10px;
+}
+
+.cardText{
+    width: calc(100%);
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardChecboxContainer{
+    margin: 5px 30px;
+    z-index: 2;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}

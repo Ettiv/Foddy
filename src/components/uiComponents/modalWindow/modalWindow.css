@@ -1,0 +1,25 @@
+.modal{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+}
+
+.modal.active{
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.modalContent{
+    background-color:white;
+    border-radius: 4px;
+}
