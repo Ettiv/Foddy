@@ -4,22 +4,6 @@ import './card.css';
 
 export default class Card extends Component {
 
-    constructor(props){
-        super(props);
-
-        this.state = {
-            checked:this.props.selected
-        }
-    }
-
-    // componentDidMount(){
-    //     if(this.props.selected){
-    //         this.setState({
-    //             checked: true
-    //         })
-    //     }
-    // }
-
     render() {
 
         const card =
@@ -47,12 +31,10 @@ export default class Card extends Component {
                     className='cardChecboxContainer' 
                     onClick={(e) => {
                         e.stopPropagation();
-                        this.setState({
-                            checked: !this.state.checked
-                        });
                         this.props.onClickCheckbox();
                     }}
-                    checked={this.state.checked}
+                    defaultChecked='false'
+                    checked={this.props.selected}
                 />
                 <div className='cardPictureContainer'>
                     <img

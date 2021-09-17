@@ -1,0 +1,12 @@
+.deleteButtonContainer{
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content:center ;
+    background-color: red;
+}
+
+.deleteButonPicture{
+    max-width: 70%;
+    max-height: 70% ;  
+}

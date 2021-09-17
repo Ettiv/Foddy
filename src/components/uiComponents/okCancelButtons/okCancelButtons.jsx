@@ -6,7 +6,7 @@ export default class OkCancelButtons extends Component{
 
     render(){
         return(
-            <div className='okCancelButtonsContainer'>
+            <div className={this.props.className + ' okCancelButtonsContainer'}>
                 <button 
                     className='okButton'
                     onClick={this.props.onOkClick} 

@@ -34,6 +34,20 @@ class MealsDataService {
         return axios.get(`${JPA_API_URL}/mealProducts/search/findByMealId?mealId=${id}`);
     }
 
+    crateProductInMealProducts(product){
+        return axios.post(`${JPA_API_URL}/mealProducts`, product);
+    }
+
+    deleteProductInMealProducts(id){
+        return axios.delete(`${JPA_API_URL}/mealProducts/${id}`);
+    }
+
+    updateProductInMealProducts(id,mealProduct){
+        return axios.put(`${JPA_API_URL}/mealProducts/${id}`, mealProduct);
+    }
+
+    
+
 
 
 

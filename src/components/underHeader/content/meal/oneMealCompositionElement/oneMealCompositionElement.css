@@ -1,0 +1,24 @@
+.oneMealCompositionElement{
+    display:flex;
+    margin-top: 3px;
+    align-items:center;
+    flex-grow: 1;
+}
+
+.onePartOfElement{
+    margin-left: 5px ;
+    display: flex;
+    align-items:center;
+}
+
+.compositionInut{
+    width:20px;
+    padding: 3px;
+}
+
+.deleteOneMealCompositionElement{
+    width: 20px;
+    height: 20px;
+    justify-self: flex-end;
+    margin: 6px 6px 6px auto;
+}

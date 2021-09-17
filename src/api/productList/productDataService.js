@@ -29,6 +29,10 @@ class ProductDataService {
     deleteProduct(id) {
         return axios.delete(`${JPA_API_URL}/products/${id}`);
     }
+    
+    retriveAllProductsSearchedByName(name){
+        return axios.get(`${JPA_API_URL}/products/search/findByNameContainingIgnoreCase?name=${name}`)
+    }
 
 
 

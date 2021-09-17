@@ -5,7 +5,9 @@ import './product.css';
 import ProductDataService from "../../../../api/productList/productDataService";
 import EditDeleteButtons from "../editDeleteButtons/editDeleteButtons";
 import CustomSelect from "../../../uiComponents/customSelect/customSelect";
-export default class Product extends Component {
+import {connect} from 'react-redux';
+import {setProductsCurrentPage} from '../../../../redux/actions.js'
+class Product extends Component {
 
     constructor(props) {
         super(props);
@@ -19,7 +21,8 @@ export default class Product extends Component {
             fats: null,
             carbohydrates: null,
             productTypeId: null,
-            edit: false
+            edit: false,
+            productUntoched: null
         }
 
         this.togleEdit = this.togleEdit.bind(this);
@@ -28,6 +31,7 @@ export default class Product extends Component {
         this.onSave = this.onSave.bind(this);
         this.onClose = this.onClose.bind(this);
         this.onDelete = this.onDelete.bind(this);
+        this.onStopEdit = this.onStopEdit.bind(this);
     }
 
     componentDidMount() {
@@ -36,6 +40,7 @@ export default class Product extends Component {
             this.setState({
                 edit: true
             })
+            return;
         }
 
         ProductDataService.retriveAllProductsTypes()
@@ -65,7 +70,8 @@ export default class Product extends Component {
                     proteins: response.data.proteins,
                     fats: response.data.fats,
                     carbohydrates: response.data.carbohydrates,
-                    productTypeId: response.data.productTypeId
+                    productTypeId: response.data.productTypeId,
+                    productUntoched:response.data
                 })
             })
     }
@@ -90,16 +96,40 @@ export default class Product extends Component {
             ProductDataService.createProduct(product)
                 .then(() => {
                     this.togleEdit();
+                    this.setState({
+                        productUntoched:product
+                    });
                 });
         } else {
             ProductDataService.updateProduct(this.state.id, product)
                 .then(() => {
                     this.togleEdit();
+                    this.setState({
+                        productUntoched:product
+                    });
                 });
         }
     }
 
     onEdit() {
+        this.togleEdit();
+    }
+
+    onStopEdit(){
+
+        if(this.state.productUntoched === null){
+            this.props.history.push(`/main/products`);
+            return;
+        }
+
+        this.setState({
+            name: this.state.productUntoched.name,
+            calories: this.state.productUntoched.calories,
+            proteins: this.state.productUntoched.proteins,
+            fats: this.state.productUntoched.fats,
+            carbohydrates: this.state.productUntoched.carbohydrates,
+            productTypeId: this.state.productUntoched.productTypeId
+        })
         this.togleEdit();
     }
 
@@ -220,6 +250,7 @@ export default class Product extends Component {
                         onClickSave={this.onSave}
                         onClickDelete={() => this.onDelete(this.state.id)}
                         edit={this.state.edit}
+                        stopEdit={this.onStopEdit}
                     />
                 </div>
                 <div className='productInforamtionContainer'>
@@ -255,3 +286,15 @@ export default class Product extends Component {
         )
     }
 }
+
+const mapDispatchToProps = {
+    setProductsCurrentPage
+}
+
+const mapStateToProps = (state) => {//преобразует данные из стора в пропсы,которые мы далее используем в компоненте
+    return {
+        productsCurrentPage: state.pagesControolReducer.productsCurrentPage
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);

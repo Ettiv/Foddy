@@ -6,6 +6,7 @@ import ProductsList from "./productsList/productsList";
 import Product from "./product/product";
 import MealsList from "./mealsList/mealsList";
 import Meal from "./meal/meal";
+import Store from "./store/store";
 
 
 export default class Content extends Component{
@@ -19,6 +20,7 @@ export default class Content extends Component{
                 <AutfinticatedRoute exact path='/main/meals' role='ROLE_USER' component={MealsList}/>
                 <AutfinticatedRoute exact path='/main/meals/:id' role='ROLE_USER' component={Meal}/>
                 <AutfinticatedRoute exact path='/main/meals/-1' role='ROLE_USER' component={Meal}/>
+                <AutfinticatedRoute exact path='/main/store' role='ROLE_USER' component={Store}/>
             </Switch>    
         )
     }

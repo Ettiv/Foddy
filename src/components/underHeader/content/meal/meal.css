@@ -39,7 +39,7 @@
 
 .mealInforamtionContainer{
     width: 600px;
-    height: 600px;
+    height: 330px;
     margin: 10px 0 0 10px;
     border-radius:4px;
     background-color:#333336;
@@ -72,8 +72,43 @@
     border-radius:4px;
 }
 
+.mealRecipeContaner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 600px;
+    padding: 5px;
+    background-color:#333336;
+    margin: 10px 0 0 10px;
+    border-radius:4px;
+    max-height: 600px;
+    overflow: auto;
+
+}
+
+.mealRecipe{
+    width: 590px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+
+.mealRecipeEditContainer{
+    display: flex;
+}
+
+.mealRecipeEdit{
+    min-width: 100%;
+}
+
+
 .flex{
     display:flex;
+}
+
+.flexColumn{
+    display: flex;
+    flex-direction: column;
 }
 
 .margin5px{

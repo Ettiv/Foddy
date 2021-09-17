@@ -6,66 +6,99 @@ import SearchPanel from "../searchPanel/searchPanel";
 import Cards from "../cards/cards";
 import PagesNavigator from "../pagesNavigator/pagesNavigator";
 import ProductDataService from "../../../../api/productList/productDataService";
+import { connect } from 'react-redux';
+import { setProductsCurrentPage, setProductsTotalPages, setProductSearhParametr } from '../../../../redux/actions.js'
 
-export default class ProductsList extends Component{
+class ProductsList extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
-        this.state= {
+        this.state = {
             products: [],
-            totalPages:0,
-            currentPage:0
         }
 
         this.refreshProducts = this.refreshProducts.bind(this);
         this.onProductClicked = this.onProductClicked.bind(this);
         this.onAddedCardCliced = this.onAddedCardCliced.bind(this);
-        this.setCurrentPage = this.setCurrentPage.bind(this);
+        this.setProductsCurrentPage = this.setProductsCurrentPage.bind(this);
+        this.onSearchProduct = this.onSearchProduct.bind(this);
 
     }
 
-    refreshProducts(page = 0,size = 35){
-        ProductDataService.retriveAllProducts(page,size)
-        .then(response => {
-            this.setState({
-                products:response.data._embedded.products,
-                totalPages:response.data.page.totalPages
-            })
-        })
+    refreshProducts(page = 0, size = 35, searchParametr = '') {
+        if (searchParametr === '') {
+            ProductDataService.retriveAllProducts(page, size)
+                .then(response => {
+                    this.setState({
+                        products: response.data._embedded.products
+                    })
+                    this.props.setProductsTotalPages(response.data.page.totalPages);
+                })
+        } else {
+            ProductDataService.retriveAllProductsSearchedByName(searchParametr)
+                .then(response => {
+                    this.setState({
+                        products: response.data._embedded.products
+                    })
+                    // this.props.setProductsTotalPages(response.data.page.totalPages);
+                })
+        }
     }
 
-    onProductClicked(id){
+    onProductClicked(id) {
         this.props.history.push(`/main/products/${id}`);
     }
 
-    onAddedCardCliced(){
+    onAddedCardCliced() {
         this.props.history.push(`/main/products/-1`);
     }
 
-    setCurrentPage(page){
-        this.setState({
-            currentPage:page
-        })
-        this.refreshProducts(page);
+    setProductsCurrentPage(page) {
+        this.props.setProductsCurrentPage(page);
+        this.refreshProducts(page)
     }
 
-    render(){
-        return(
+    onSearchProduct(event) {
+        this.props.setProductSearhParametr(event.target.value);
+        this.refreshProducts(0,35,event.target.value);
+    }
+
+    render() {
+        return (
             <div className='contentContainer'>
-                <SearchPanel/>
+                <SearchPanel
+                    onSearch={this.onSearchProduct}
+                    value={this.props.productsSearchParametr}
+                />
                 <Cards
-                    onAddedCardCliced={this.onAddedCardCliced} 
-                    refreshCards={this.refreshProducts} 
-                    cards={this.state.products} 
+                    onAddedCardCliced={this.onAddedCardCliced}
+                    refreshCards={() => this.refreshProducts(this.props.productsCurrentPage)}
+                    cards={this.state.products}
                     onCardClicked={this.onProductClicked}
                 />
-                <PagesNavigator 
-                    totalPages={this.state.totalPages}
-                    currentPage={this.state.currentPage}
-                    onButtonClick={this.setCurrentPage}
+                <PagesNavigator
+                    totalPages={this.props.productsTotalPages}
+                    currentPage={this.props.productsCurrentPage}
+                    onButtonClick={this.setProductsCurrentPage}
                 />
             </div>
         )
     }
 }
+
+const mapDispatchToProps = {
+    setProductsCurrentPage,
+    setProductsTotalPages,
+    setProductSearhParametr
+}
+
+const mapStateToProps = (state) => {//преобразует данные из стора в пропсы,которые мы далее используем в компоненте
+    return {
+        productsCurrentPage: state.pagesControolReducer.productsCurrentPage,
+        productsTotalPages: state.pagesControolReducer.productsTotalPages,
+        productsSearchParametr: state.searchParametrsReducer.productsSearchParametr
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);
